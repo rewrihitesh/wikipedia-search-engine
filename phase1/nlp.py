@@ -33,6 +33,13 @@ def load_stopwords():
 	stopwords['Template']=True;
 	stopwords['ref']=True;
 	stopwords['br']=True;
+	stopwords['pdf']=True;
+	stopwords['png']=True;
+	stopwords['jpg']=True;
+	stopwords['org']=True;
+	stopwords['html']=True;
+	stopwords['http']=True;
+
 	return stopwords;
 
 
@@ -59,7 +66,7 @@ class preProcessor():
 		tokens=[]
 		# TO-DO I have to add dynamic stemming  
 		for token in tokenList:
-			if(token not in self.dynamicStemming)
+			if(token not in self.dynamicStemming):
 				word=stemmer.stem(token);
 				self.dynamicStemming[token]=word
 			tokens.append(self.dynamicStemming[token])
@@ -170,5 +177,5 @@ class preProcessor():
 		bodyTokens=self.tokenisStopWordsStemming(' '.join(body))
 
 		externalLinksTokens=self.externalLinks(data)
-		
+
 		print(infoboxTokens)
