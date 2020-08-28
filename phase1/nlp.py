@@ -39,6 +39,7 @@ def load_stopwords():
 class preProcessor():
 	def __init__(self):
 		self.stopwords=load_stopwords();
+		self.dynamicStemming=defaultdict(str)
 	
 	def tokenise(self,data,regex=r'[a-z]+'):
 		import re
@@ -58,8 +59,10 @@ class preProcessor():
 		tokens=[]
 		# TO-DO I have to add dynamic stemming  
 		for token in tokenList:
-			word=stemmer.stem(token);
-			tokens.append(word)
+			if(token not in self.dynamicStemming)
+				word=stemmer.stem(token);
+				self.dynamicStemming[token]=word
+			tokens.append(self.dynamicStemming[token])
 		return tokens
 
 	def tokenisStopWordsStemming(self,data,regex=r'[a-z]+'):
@@ -157,8 +160,15 @@ class preProcessor():
 				i+=1
 			else:
 				i+=1
-		infoboxString=' '.join(infobox)
-		infoboxTokens=self.tokenisStopWordsStemming(infoboxString)
+
+		infoboxTokens=self.tokenisStopWordsStemming(' '.join(infobox))
+
+		catgoriesTokens=self.tokenisStopWordsStemming(' '.join(catgories))
+
+		referencesTokens=self.tokenisStopWordsStemming(' '.join(references))
+
+		bodyTokens=self.tokenisStopWordsStemming(' '.join(body))
 
 		externalLinksTokens=self.externalLinks(data)
+		
 		print(infoboxTokens)
