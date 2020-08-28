@@ -38,7 +38,7 @@ def load_stopwords():
 	stopwords['jpg']=True;
 	stopwords['org']=True;
 	stopwords['html']=True;
-	stopwords['http']=True;
+	# stopwords['http']=True;
 
 	return stopwords;
 
