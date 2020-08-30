@@ -30,14 +30,13 @@ def load_stopwords():
 			stopwords[word]=True;
 	# some of wiki specific stopwords 
 	stopwords['category']=True;
-	stopwords['Template']=True;
+	stopwords['template']=True;
 	stopwords['ref']=True;
 	stopwords['br']=True;
 	stopwords['pdf']=True;
 	stopwords['png']=True;
 	stopwords['jpg']=True;
 	stopwords['org']=True;
-	stopwords['html']=True;
 	# stopwords['http']=True;
 
 	return stopwords;
@@ -47,12 +46,14 @@ class preProcessor():
 	def __init__(self):
 		self.stopwords=load_stopwords();
 		self.dynamicStemming=defaultdict(str)
+		self.totalTokens=0
 	
 	def tokenise(self,data,regex=r'[a-z]+'):
 		import re
 		data=data.lower()
 		tokens=[]
 		tokens=re.findall(regex,data);
+		self.totalTokens+=len(tokens)
 		return tokens
 
 	def removeStopWords(self,tokenList):
@@ -70,6 +71,9 @@ class preProcessor():
 				word=stemmer.stem(token);
 				self.dynamicStemming[token]=word
 			tokens.append(self.dynamicStemming[token])
+		# for token in tokenList:
+		# 	word=stemmer.stem(token);
+		# 	tokens.append(word)	
 		return tokens
 
 	def tokenisStopWordsStemming(self,data,regex=r'[a-z]+'):
@@ -81,6 +85,7 @@ class preProcessor():
 	def processTitle(self,data):
 		regex=r'\d+|[\w]+'
 		tokens=self.tokenisStopWordsStemming(data,regex)
+		return tokens
 		# print(tokens);
 
 	def externalLinks(self,data):
@@ -109,6 +114,7 @@ class preProcessor():
 		# area_land_sq_mi
 		# it is also standard practice to ...
 		data = data.replace('_',' ');
+		
 		data = data.replace('-',' ');
 		# County,
 		data=data.replace(',','')
@@ -177,5 +183,8 @@ class preProcessor():
 		bodyTokens=self.tokenisStopWordsStemming(' '.join(body))
 
 		externalLinksTokens=self.externalLinks(data)
+		
+		# print(infoboxTokens)
 
-		print(infoboxTokens)
+		return infoboxTokens,catgoriesTokens,referencesTokens,bodyTokens,externalLinksTokens
+

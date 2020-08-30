@@ -1,5 +1,8 @@
 import xml.sax
 from nlp import preProcessor
+from invertedindex import invertedIndex
+from utility import progress
+
 
 class wikihandler(xml.sax.ContentHandler):
 	def __init__(self):
@@ -13,8 +16,9 @@ class wikihandler(xml.sax.ContentHandler):
 		self.bufTitle=""
 		self.bufText=""
 
-		self.titleCount=0
+		self.pageCount=0;
 		self.pp=preProcessor()
+		self.invertedIndex=invertedIndex()
 
 	def startElement(self,tag,attrs):
 		if(tag=="page"):
@@ -30,26 +34,58 @@ class wikihandler(xml.sax.ContentHandler):
 
 	def endElement(self,tag):
 		if(tag=="page"):
-			self.firstID=False
-			self.bufID=""
+			self.pageCount+=1
+			total = 19797
 			
+			progress(self.pageCount, total, status='Creating Index!!')
+			# if(self.pageCount%1000==0 or self.pageCount>19600 ):
+			# 	print(self.pageCount, self.pp.totalTokens)
+			
+			# print(self.bufID)
+			# print(self.bufTitle)
+			# print(self.bufText)
+
+			self.id=False
+			self.firstID=True
+
+
+			## build you index here page by page
+			
+			titleTokens=self.pp.processTitle(self.bufTitle)
+			infoboxTokens,catgoriesTokens,referencesTokens,bodyTokens,externalLinksTokens=self.pp.processText(self.bufText)
+
+			self.invertedIndex.buildIndex(self.bufID,titleTokens,
+				infoboxTokens,catgoriesTokens,referencesTokens,
+				bodyTokens,externalLinksTokens);
+
+			self.bufID=""
+			self.bufTitle=""
+			self.bufText=""
+
 		elif(tag=="id"):
 			self.id=False
 		if(tag=="title"):
 			self.title=False;
-			self.pp.processTitle(self.bufTitle)
-			self.bufTitle=""
 		elif(tag=="text"):
 			self.text=False;
-			self.pp.processText(self.bufText)
-			self.bufText=""
+		elif(tag=="mediawiki"):
+			print("\nTotal Tokens :",self.pp.totalTokens)
+			import os
+			curPath = os.getcwd()
+			statFile=open(curPath+'/inverted_stat.txt','w+')
+			print("inverted_stat.txt path :",curPath)
+			statFile.write("Total Tokens :"+str(self.pp.totalTokens)+'\n')
 	
 	def characters(self,data):
 		if(self.id):
 			self.bufID+=data
 		elif(self.title):
 			self.bufTitle+=data
-			# print(data," :: ",end=" ")
-			self.titleCount+=1
 		elif(self.text):
 			self.bufText+=data
+
+	def writeIndex(self,fileName):
+		self.invertedIndex.writeIndex(fileName)
+
+	def readIndex(self,fileName):
+		pass
