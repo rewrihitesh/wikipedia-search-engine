@@ -97,7 +97,9 @@ class invertedIndex():
 		curPath = os.getcwd()
 		statFile=open(curPath+'/inverted_stat.txt','a+')
 		statFile.write("Total Inverted Tokens :"+str(self.totalInvertedTokens)+'\n')
-		
+		statFile.close()
+
+
 		indexSize=len(self.index)
 		j=0
 		file=open(fileName,'w+')
@@ -124,6 +126,7 @@ class invertedIndex():
 			file.write('\n')
 			progress(j,indexSize,'writing index!!')
 			j+=1
+		file.close()
 
 
 	def readIndex(self,fileName):
