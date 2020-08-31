@@ -92,10 +92,7 @@ class invertedIndex():
 		self.totalInvertedTokens=len(self.index)
 		print("totalInvertedTokens::", self.totalInvertedTokens)
 		
-		import os
-		
-		curPath = os.getcwd()
-		statFile=open(curPath+'/inverted_stat.txt','a+')
+		statFile=open(utility.getStatPath(),'a+')
 		statFile.write("Total Inverted Tokens :"+str(self.totalInvertedTokens)+'\n')
 		statFile.close()
 

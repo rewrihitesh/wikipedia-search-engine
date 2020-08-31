@@ -70,11 +70,11 @@ class wikihandler(xml.sax.ContentHandler):
 			self.text=False;
 		elif(tag=="mediawiki"):
 			print("\nTotal Tokens :",self.pp.totalTokens)
-			import os
-			curPath = os.getcwd()
-			statFile=open(curPath+'/inverted_stat.txt','w+')
-			print("inverted_stat.txt path :",curPath)
+			statFile=open(utility.getIndexPath(),'w+')
+			print("inverted_stat.txt path :",utility.getIndexPath())
 			statFile.write("Total Tokens :"+str(self.pp.totalTokens)+'\n')
+	
+			statFile.close()
 	
 	def characters(self,data):
 		if(self.id):

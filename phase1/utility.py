@@ -1,8 +1,30 @@
 import sys
 import os
 
+indexPath=""
+statPath=""
+
 def getCurrentPath():
 	return os.getcwd()
+
+def setCurrentPath():
+	pass
+
+def setIndexPath(data):
+	global indexPath
+	indexPath= os.getcwd()+'/'+ data + 'index'
+
+def  getIndexPath():
+	global indexPath
+	return indexPath
+
+def setStatPath(data):
+	global statPath
+	statPath= os.getcwd()+'/'+ data
+
+def  getStatPath():
+	global statPath
+	return statPath
 
 def progress(count, total, status=''):
 	bar_len = 60

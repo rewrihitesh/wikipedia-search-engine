@@ -48,7 +48,7 @@ class preProcessor():
 		self.dynamicStemming=defaultdict(str)
 		self.totalTokens=0
 	
-	def tokenise(self,data,regex=r'[a-z]+'):
+	def tokenise(self,data,regex=r'\d+|[\w]+'):
 		import re
 		data=data.lower()
 		tokens=[]
@@ -76,7 +76,7 @@ class preProcessor():
 		# 	tokens.append(word)	
 		return tokens
 
-	def tokenisStopWordsStemming(self,data,regex=r'[a-z]+'):
+	def tokenisStopWordsStemming(self,data,regex=r'\d+|[\w]+'):
 		tokens=self.tokenise(data,regex);
 		tokens=self.removeStopWords(tokens);
 		tokens=self.stemming(tokens);
