@@ -57,9 +57,9 @@ def readIndex(fileName):
 
 
 
-def loadIndex():
+def loadIndex(indexPath):
 	global index
-	index=readIndex("/home/hitesh/sem3/IRE/wiki/phase1/inverted_index")
+	index=readIndex(indexPath)
 
 def parseQuery(query):
 	pp=preProcessor()
@@ -77,7 +77,8 @@ def plainQuery(query,pp):
 
 def fieldQuery(tokens,pp):
 	global index
-	temp=re.findall(r'\w+',tokens)
+	temp=re.findall(r'\d+|\w+',tokens)
+	print(temp)
 	for t in temp:
 		idx=0
 		if(t=='d'):
@@ -95,7 +96,7 @@ def fieldQuery(tokens,pp):
 		elif(t=='e'):
 			idx=6
 		else:
-			word=pp.tokenisStopWordsStemming(t)
+			word=pp.tokenisStopWordsStemming(t,r'\d+|\w+')
 			postingList=index[word[0]] # lis of arrays
 			for posting in postingList:
 				if(posting[idx]>0):
@@ -110,10 +111,22 @@ if __name__ == "__main__":
 	
 	print("array[docID,title,infobox,category,references,body,externalLinks]")
 
-	loadIndex()
-
-	query=sys.argv[1]
+	path=sys.argv[1]
 	
+	query=""
+	
+	n=len(sys.argv)
+	for i in range(2,n):
+		query+=sys.argv[i]+' '
+
+	indexPath=utility.getCurrentPath()+'/'+path + 'index'
+
+	# print(query)
+
+	# temp=re.findall(r'\d+|\w+',query)
+	# print(temp)
+
+	loadIndex(indexPath)
 	parseQuery(query)
 
 	stop = default_timer()
