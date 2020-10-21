@@ -22,3 +22,48 @@ Etree is used to parse the XML Corpus without loading the entire corpus in memor
 include terms like redirect,URL,png, HTTP etc.
 
 `Term filter`      : This removes some of the common terms that are found in abundance in all the pages. These 
+
+**NOTE** One major optimization is done in stemming to reduce time of indexing is that, till 50000 document any repeatative word is not again stemmed,i.e we have used dynamic programming based approach here because stemming is time consuming and this has reduced indexing time to half.
+
+#### As a part of Primary Inverted Index we have 4 files
+
+. `titlePosting`    :It contain docid and tf-idf of word part of document title with respect to a document.
+
+. `CategoryPosting` :It contain docid and tf-idf of word part of category field with respect to a document.
+
+. `InfoBoxPosting`  :It contain docid and tf-idf of corresponding word part of infobox fild with respect to a document.
+
+. `textPosting`:    :It contain docid and tf-idf of corresponding word part of text,references and external links with respect to a document.
+
+Secondary Index:
+
+. `WordPosition`    :It keep the track of posting list of word in title,infobox,text and category and allow as **O(log(n))** access to them and 			   worked as a secondary index above field wise inverted index.
+
+		  `XYX:{d:45454 t:45142 c:4587574 i:4545870}`
+
+**Ranking Factor**
+While building index ranking of top 10 document corresponding to a word is done using td-idf and build a champion list and write into file.
+
+**Merging all temporary indexes using block based external merge sort algorithm**
+I have wote eficent K-Way Merge sort to sort the presorted multiple indeices.
+
+#### Term Field Abbreviations For Search:
+
+. Infobox abbreviated as i
+
+. Body abbreviated as b
+
+. Title abbreviated as t
+
+. External Link abbreviated as e
+
+. References abbreviated as r 
+
+. Category abbreviated as c
+
+
+#### Query Format
+
+. `Field Query`  : t:abc b:xyz c:xxy i:dde e:ref r:ext
+
+. `Normal Query` : word1 wor2 word3
