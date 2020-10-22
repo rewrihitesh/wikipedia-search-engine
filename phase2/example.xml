@@ -1,0 +1,12 @@
+<examples>
+  <example num="1">
+    <title>Example 1</title>
+    <text>This is example nr. 1. It shows how an example looks.This is example nr. 1. It shows how an example looks.This is example nr. 1. It shows how an example looks.This is example nr. 1. It shows how an example looks.This is example nr. 1. It shows how an example looks.This is example nr. 1. It shows how an example looks.
+    </text>
+  </example>
+
+  <example num="2">
+    <title>Example 2</title>
+    <text>Another example. Imagine some ingenious text here...</text>
+  </example>
+</examples>
