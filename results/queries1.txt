@@ -1,0 +1,25 @@
+10, t:Birdseye b:Tarantula
+10, t:It's All True c:films
+10, b:Prisoner of Azkaban i:2004
+10, Chongqing University
+20, Trinec Steel Works
+5, b:Football Manager i:2008
+20, t:richard w richard b:shackleton
+10, t:J. F. Drake Middle School
+10, v for vendetta
+20, Interlaken
+5, Louisiana State University
+10, t:love b:Arrows
+20, t:NFL quarterbacks b:passer rating
+10, t:Painted tree-rat i:Myocastorini
+10, Pozzo di Borgo
+5, b:1898 c:Leicester City Football League
+10, Canoeing 2004 Summer Olympics
+20, t:grand i:2000 b:title
+3, b:V for Vendetta i:2006
+5, young's modulus
+10, b:Speed of light c:Concepts in physics
+20, b:angus r:tories i:James Lee
+30, b:Taxicab 1729
+50, b:Marc Spector i:Marvel Comics c:1980 comics debuts
+100, Sudebnik
