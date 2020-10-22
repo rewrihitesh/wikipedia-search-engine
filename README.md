@@ -67,3 +67,8 @@ I have wote eficent K-Way Merge sort to sort the presorted multiple indeices.
 . `Field Query`  : t:abc b:xyz c:xxy i:dde e:ref r:ext
 
 . `Normal Query` : word1 wor2 word3
+
+#### TO DO
+
+. auto search wikipedia dump and automate index creation 
+. make simplified web app
