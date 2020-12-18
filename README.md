@@ -68,6 +68,12 @@ I have wote eficent K-Way Merge sort to sort the presorted multiple indeices.
 
 . `Normal Query` : word1 wor2 word3
 
+#### Instruction:
+1. Download the data from https://dumps.wikimedia.org/
+2. Rename rename.sh 
+
+
+
 #### TO DO
 
 . auto search wikipedia dump and automate index creation 
