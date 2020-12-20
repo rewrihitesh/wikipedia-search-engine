@@ -70,7 +70,8 @@ I have wote eficent K-Way Merge sort to sort the presorted multiple indeices.
 
 #### Instruction:
 1. Download the data from https://dumps.wikimedia.org/
-2. Rename rename.sh 
+2. Extract the data.bz2 file to ./Download folder
+3. Run the run.sh file
 
 
 
